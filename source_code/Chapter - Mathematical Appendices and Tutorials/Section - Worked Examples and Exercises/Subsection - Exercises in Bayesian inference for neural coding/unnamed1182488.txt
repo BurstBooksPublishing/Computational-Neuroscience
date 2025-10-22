@@ -1,0 +1,13 @@
+def evidence(y_list, a_list, b_list, mu, sigma, model):
+    if model == 'linear':
+        likelihood_func = lambda x: np.prod([(a * x + b) ** y * np.exp(-(a * x + b)) / np.math.factorial(y) for y, a, b in zip(y_list, a_list, b_list)])
+    elif model == 'exponential':
+        likelihood_func = lambda x: np.prod([np.exp(-np.exp(a * x + b)) * (np.exp(a * x + b) ** y) / np.math.factorial(y) for y, a, b in zip(y_list, a_list, b_list)])
+    else:
+        raise ValueError("Invalid model type.")
+    return quad(lambda x: likelihood_func(x) * prior(x, mu, sigma), -np.inf, np.inf)[0]
+
+def bayes_factor(y_list, a_list, b_list, mu, sigma):
+    evidence_model1 = evidence(y_list, a_list, b_list, mu, sigma, 'linear')
+    evidence_model2 = evidence(y_list, a_list, b_list, mu, sigma, 'exponential')
+    return evidence_model1 / evidence_model2
