@@ -1,0 +1,3 @@
+def send_spike(neuron_id):
+    if neuron_id in active_neurons:
+        transmit_address(neuron_id)
