@@ -1,0 +1,16 @@
+from itertools import product
+
+# Parameter ranges
+tau_m_values = np.linspace(10, 30, 10)
+R_m_values = np.linspace(0.5, 1.5, 10)
+
+# Grid search
+best_params = None
+best_error = float('inf')
+
+for tau_m, R_m in product(tau_m_values, R_m_values):
+    V = simulate_neuron(tau_m, R_m, I_syn, t)
+    error = np.mean((V - target_V)**2)  # Example error metric
+    if error < best_error:
+        best_error = error
+        best_params = (tau_m, R_m)
