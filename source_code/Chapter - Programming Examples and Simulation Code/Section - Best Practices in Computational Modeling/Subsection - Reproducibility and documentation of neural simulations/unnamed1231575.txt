@@ -1,0 +1,19 @@
+# Neural Simulation README
+
+## Purpose
+This simulation models the dynamics of a Hodgkin-Huxley neuron.
+
+## Dependencies
+- Python 3.8
+- NumPy 1.21
+- SciPy 1.7
+
+## Running the Simulation
+1. Clone the repository:
+   git clone https://github.com/example/neural-simulation.git
+
+2. Install dependencies:
+   pip install -r requirements.txt
+
+3. Run the simulation:
+   python simulate_neuron.py
