@@ -1,0 +1,22 @@
+import numpy as np
+
+# Define states and transition matrix
+states = ['Silent', 'Active']
+transition_matrix = np.array([[0.7, 0.3],
+                             [0.4, 0.6]])
+
+# Simulate Markov chain
+def simulate_markov_chain(transition_matrix, initial_state, steps):
+    state_sequence = [initial_state]
+    current_state = initial_state
+    for _ in range(steps):
+        next_state = np.random.choice(len(states), p=transition_matrix[current_state])
+        state_sequence.append(next_state)
+        current_state = next_state
+    return state_sequence
+
+# Example simulation
+initial_state = 0  # Start in 'Silent' state
+steps = 10
+sequence = simulate_markov_chain(transition_matrix, initial_state, steps)
+print([states[i] for i in sequence])
