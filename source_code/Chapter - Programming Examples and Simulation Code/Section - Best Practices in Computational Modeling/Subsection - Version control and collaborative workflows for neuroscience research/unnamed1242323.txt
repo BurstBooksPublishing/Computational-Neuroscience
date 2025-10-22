@@ -1,0 +1,9 @@
+# Neural Network Simulation
+
+This repository contains code for simulating a simple neural network.
+
+## Installation
+pip install -r requirements.txt
+
+## Usage
+python simulate.py
