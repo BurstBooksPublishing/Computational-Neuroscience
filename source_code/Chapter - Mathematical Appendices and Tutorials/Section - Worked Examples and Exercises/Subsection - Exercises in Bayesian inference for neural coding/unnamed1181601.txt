@@ -1,0 +1,8 @@
+from scipy.optimize import minimize_scalar
+
+def negative_log_posterior(x, y, a, b, mu, sigma):
+    return -np.log(posterior(x, y, a, b, mu, sigma))
+
+def map_estimate(y, a, b, mu, sigma):
+    result = minimize_scalar(negative_log_posterior, args=(y, a, b, mu, sigma), bounds=(-10, 10), method='bounded')
+    return result.x
