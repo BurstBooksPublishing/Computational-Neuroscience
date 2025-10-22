@@ -1,0 +1,23 @@
+import numpy as np
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
+
+def fitzhugh_nagumo(t, state, a, b, I):
+    V, w = state
+    dVdt = V - V**3 / 3 - w + I
+    dwdt = (V + a - b * w) / 0.08
+    return [dVdt, dwdt]
+
+a, b = 0.7, 0.8
+I_values = np.linspace(0, 1, 100)
+V_steady = []
+
+for I in I_values:
+    sol = solve_ivp(fitzhugh_nagumo, [0, 1000], [0, 0], args=(a, b, I), t_eval=[1000])
+    V_steady.append(sol.y[0][-1])
+
+plt.plot(I_values, V_steady)
+plt.xlabel('Input Current (I)')
+plt.ylabel('Steady-State Voltage (V)')
+plt.title('Bifurcation Diagram of FitzHugh-Nagumo Model')
+plt.show()
