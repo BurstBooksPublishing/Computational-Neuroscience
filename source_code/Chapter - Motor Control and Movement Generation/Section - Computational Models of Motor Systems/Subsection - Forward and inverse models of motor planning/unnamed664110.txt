@@ -1,0 +1,4 @@
+def inverse_model(current_state, desired_state):
+    # Compute required motor command
+    command = (desired_state - current_state) / dt  # Example inverse mapping
+    return command
