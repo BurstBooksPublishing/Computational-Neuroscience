@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+lambda_ = 1.0  # Length constant
+tau = 10.0     # Time constant
+dx = 0.1       # Spatial step
+dt = 0.01      # Temporal step
+L = 10.0       # Length of the cable
+T = 50.0       # Total time
+
+# Discretization
+x = np.arange(0, L, dx)
+t = np.arange(0, T, dt)
+V = np.zeros((len(t), len(x)))
+
+# Initial condition (e.g., a pulse at x=0)
+V[0, 0] = 1.0
+
+# Finite difference method
+for n in range(1, len(t)):
+    for i in range(1, len(x)-1):
+        V[n, i] = V[n-1, i] + (dt / tau) * (lambda_**2 * (V[n-1, i+1] - 2*V[n-1, i] + V[n-1, i-1]) / dx**2 - V[n-1, i])
+
+# Plotting
+plt.imshow(V, extent=[0, L, 0, T], aspect='auto', cmap='viridis')
+plt.colorbar(label='Voltage')
+plt.xlabel('Distance (x)')
+plt.ylabel('Time (t)')
+plt.title('Cable Equation Solution')
+plt.show()
