@@ -1,0 +1,22 @@
+import numpy as np
+from scipy.integrate import odeint
+
+def model(y, t, k1, k2, Ca):
+    P = y[0]
+    dPdt = k1 * Ca * (1 - P) - k2 * P
+    return [dPdt]
+
+# Initial conditions
+P0 = 0.1
+y0 = [P0]
+
+# Parameters
+k1 = 0.5
+k2 = 0.1
+Ca = 1.0
+
+# Time points
+t = np.linspace(0, 10, 100)
+
+# Solve ODE
+y = odeint(model, y0, t, args=(k1, k2, Ca))
