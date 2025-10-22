@@ -1,0 +1,40 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+w_ee = 12
+w_ei = 4
+w_ie = 13
+w_ii = 11
+P_e = 1.25
+P_i = 0
+tau_e = 1
+tau_i = 1
+dt = 0.01
+t_max = 100
+t = np.arange(0, t_max, dt)
+
+# Sigmoid function
+def S(x):
+    return 1 / (1 + np.exp(-x))
+
+# Initial conditions
+E = np.zeros_like(t)
+I = np.zeros_like(t)
+E[0] = 0.1
+I[0] = 0.1
+
+# Euler method
+for i in range(1, len(t)):
+    dE_dt = (-E[i-1] + S(w_ee * E[i-1] - w_ei * I[i-1] + P_e)) / tau_e
+    dI_dt = (-I[i-1] + S(w_ie * E[i-1] - w_ii * I[i-1] + P_i)) / tau_i
+    E[i] = E[i-1] + dt * dE_dt
+    I[i] = I[i-1] + dt * dI_dt
+
+# Plotting
+plt.plot(t, E, label='Excitatory')
+plt.plot(t, I, label='Inhibitory')
+plt.xlabel('Time')
+plt.ylabel('Activity')
+plt.legend()
+plt.show()
