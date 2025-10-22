@@ -1,0 +1,32 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2">
+  <cell id="example_cell">
+    <morphology id="morphology1">
+      <segment id="0" proximal="0 0 0 5" distal="0 0 50 5"/>
+    </morphology>
+    <biophysicalProperties id="biophys1">
+      <membraneProperties>
+        <channelDensity id="Na" ionChannel="NaChannel" conductance="120 mS/cm2"/>
+      </membraneProperties>
+    </biophysicalProperties>
+  </cell>
+</neuroml>
+SONATA (Scalable Open Network Architecture for Tabulated Annotations) is another standardized format, specifically designed for large-scale neural network simulations. It focuses on efficiency and scalability, making it suitable for simulating networks with millions of neurons. SONATA uses a combination of HDF5 and JSON files to store network structure, connectivity, and simulation parameters. This format is particularly useful for high-performance computing environments. Below is an example of a SONATA network configuration in JSON:
+
+{
+  "manifest": {
+    "$NETWORK_DIR": "./network"
+  },
+  "target_simulator": "NEURON",
+  "nodes": [
+    {
+      "nodes_file": "$NETWORK_DIR/nodes.h5",
+      "node_types_file": "$NETWORK_DIR/node_types.csv"
+    }
+  ],
+  "edges": [
+    {
+      "edges_file": "$NETWORK_DIR/edges.h5",
+      "edge_types_file": "$NETWORK_DIR/edge_types.csv"
+    }
+  ]
+}
