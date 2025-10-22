@@ -1,0 +1,5 @@
+# Compute the discrete wavelet transform
+coeffs = pywt.wavedec(signal, 'db4', level=5)
+
+# Reconstruct the signal from the coefficients
+reconstructed_signal = pywt.waverec(coeffs, 'db4')
