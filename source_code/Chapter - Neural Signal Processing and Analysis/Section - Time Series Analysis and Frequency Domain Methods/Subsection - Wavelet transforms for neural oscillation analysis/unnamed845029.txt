@@ -1,0 +1,10 @@
+import pywt
+import numpy as np
+
+# Generate a sample signal
+t = np.linspace(0, 1, 1000, endpoint=False)
+signal = np.sin(2 * np.pi * 10 * t) + np.sin(2 * np.pi * 20 * t)
+
+# Compute the continuous wavelet transform
+scales = np.arange(1, 128)
+coefficients, frequencies = pywt.cwt(signal, scales, 'morl')
