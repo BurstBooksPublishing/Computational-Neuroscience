@@ -1,9 +1,0 @@
-from sklearn.decomposition import PCA
-import numpy as np
-
-# Load calcium imaging data (time x neurons)
-data = np.load('calcium_data.npy')
-
-# Apply PCA
-pca = PCA(n_components=10)
-reduced_data = pca.fit_transform(data)

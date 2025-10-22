@@ -1,2 +1,0 @@
-def gap_junction_current(Vi, Vj, Gj):
-    return Gj * (Vi - Vj)

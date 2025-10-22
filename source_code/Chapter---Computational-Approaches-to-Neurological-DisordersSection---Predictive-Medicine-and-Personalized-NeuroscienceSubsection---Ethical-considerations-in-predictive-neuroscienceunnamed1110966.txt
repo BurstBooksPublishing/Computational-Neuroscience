@@ -1,3 +1,0 @@
-import shap
-explainer = shap.DeepExplainer(model, data)
-shap_values = explainer.shap_values(data)

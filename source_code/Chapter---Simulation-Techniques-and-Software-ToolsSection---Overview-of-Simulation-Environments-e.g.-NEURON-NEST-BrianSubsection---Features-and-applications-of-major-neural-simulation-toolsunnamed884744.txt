@@ -1,4 +1,0 @@
-from neuron import h, gui
-
-soma = h.Section(name='soma')
-soma.insert('hh')

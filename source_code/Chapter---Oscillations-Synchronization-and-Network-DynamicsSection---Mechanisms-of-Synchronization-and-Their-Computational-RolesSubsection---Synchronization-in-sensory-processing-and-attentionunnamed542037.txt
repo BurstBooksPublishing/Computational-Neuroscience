@@ -1,4 +1,0 @@
-import numpy as np
-
-def phase_reset(phases, reset_strength):
-    return phases + reset_strength * np.sin(phases)

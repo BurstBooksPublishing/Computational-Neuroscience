@@ -1,3 +1,0 @@
-python -m venv neurosim_env
-source neurosim_env/bin/activate
-pip install brian2 numpy scipy matplotlib

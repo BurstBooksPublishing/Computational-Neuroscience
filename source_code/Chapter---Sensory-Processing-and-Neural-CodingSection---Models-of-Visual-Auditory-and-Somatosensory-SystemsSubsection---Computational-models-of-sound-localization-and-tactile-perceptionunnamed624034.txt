@@ -1,3 +1,0 @@
-from sklearn.svm import SVC
-model = SVC(kernel='linear')
-model.fit(ILD_features, angles)

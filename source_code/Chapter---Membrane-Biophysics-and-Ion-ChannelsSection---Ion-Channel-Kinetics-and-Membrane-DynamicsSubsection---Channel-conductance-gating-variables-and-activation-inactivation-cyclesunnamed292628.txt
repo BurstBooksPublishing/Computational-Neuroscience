@@ -1,4 +1,0 @@
-def update_gating_variable(m, alpha_m, beta_m, dt):
-    dm_dt = alpha_m * (1 - m) - beta_m * m
-    m_new = m + dm_dt * dt
-    return m_new

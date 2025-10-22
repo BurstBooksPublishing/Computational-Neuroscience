@@ -1,8 +1,0 @@
-% Load PET data
-pet_img = spm_vol('pet_data.nii');
-
-% Perform statistical analysis
-spm_results = spm_analysis(pet_img);
-
-% Save the results
-spm_write_vol(spm_results, 'spm_results.nii');

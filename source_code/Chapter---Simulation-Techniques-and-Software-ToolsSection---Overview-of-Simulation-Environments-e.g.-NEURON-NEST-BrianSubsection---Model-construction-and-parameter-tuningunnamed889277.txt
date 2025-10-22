@@ -1,1 +1,0 @@
-nest.SetStatus(neuron, {'tau_m': 20.0})  # membrane time constant in ms

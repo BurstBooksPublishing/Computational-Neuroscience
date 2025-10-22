@@ -1,8 +1,0 @@
-import numpy as np
-
-# Define weight matrices and hidden state
-W_h = np.random.randn(10, 10)  # Recurrent weight matrix
-h_t_minus_1 = np.random.randn(10, 1)  # Previous hidden state
-
-# Compute the contribution of the previous hidden state
-contribution = np.dot(W_h, h_t_minus_1)

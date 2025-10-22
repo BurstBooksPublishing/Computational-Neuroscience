@@ -1,9 +1,0 @@
-from brian2 import *
-
-tau = 20*ms
-eqs = '''
-dv/dt = (v_rest - v)/tau : volt
-v_rest : volt
-'''
-G = NeuronGroup(1, eqs, threshold='v > -50*mV', reset='v = -70*mV', method='exact')
-G.v_rest = -65*mV

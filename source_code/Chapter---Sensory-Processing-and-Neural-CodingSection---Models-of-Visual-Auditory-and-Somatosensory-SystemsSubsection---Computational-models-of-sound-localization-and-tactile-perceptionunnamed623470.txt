@@ -1,2 +1,0 @@
-def coincidence_detector(left_ear, right_ear, threshold):
-    return np.abs(left_ear - right_ear) < threshold

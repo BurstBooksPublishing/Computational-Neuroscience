@@ -1,2 +1,0 @@
-def pacinian_response(t, A, f, alpha):
-    return A * np.sin(2 * np.pi * f * t) * np.exp(-alpha * t)

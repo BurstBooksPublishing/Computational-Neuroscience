@@ -1,4 +1,0 @@
-from scipy.signal import detrend
-
-def detrend_signal(data):
-    return detrend(data, type='linear')

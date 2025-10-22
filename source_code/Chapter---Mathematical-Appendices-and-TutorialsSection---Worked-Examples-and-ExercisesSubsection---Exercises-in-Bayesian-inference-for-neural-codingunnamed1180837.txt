@@ -1,8 +1,0 @@
-def joint_likelihood(y_list, x, a_list, b_list):
-    likelihoods = [likelihood(y, x, a, b) for y, a, b in zip(y_list, a_list, b_list)]
-    return np.prod(likelihoods)
-
-def joint_posterior(x, y_list, a_list, b_list, mu, sigma):
-    numerator = joint_likelihood(y_list, x, a_list, b_list) * prior(x, mu, sigma)
-    denominator, _ = quad(lambda x: joint_likelihood(y_list, x, a_list, b_list) * prior(x, mu, sigma), -np.inf, np.inf)
-    return numerator / denominator

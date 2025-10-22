@@ -1,3 +1,0 @@
-import pyNN.hardware.brainscales as sim
-sim.setup()
-pop = sim.Population(10000, sim.IF_cond_exp())

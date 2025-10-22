@@ -1,4 +1,0 @@
-for t in range(time_steps):
-    for neuron in place_cells:
-        if neuron.is_active(t):
-            neuron.spike()

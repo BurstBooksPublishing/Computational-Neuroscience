@@ -1,2 +1,0 @@
-export PATH=/path/to/install/bin:$PATH
-export PYTHONPATH=/path/to/install/lib/python:$PYTHONPATH

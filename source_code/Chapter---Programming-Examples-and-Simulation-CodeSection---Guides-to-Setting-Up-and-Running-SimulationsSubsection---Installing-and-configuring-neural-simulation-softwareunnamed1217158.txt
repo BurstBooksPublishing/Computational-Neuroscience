@@ -1,1 +1,0 @@
-sudo apt-get install cmake libboost-all-dev libgsl-dev

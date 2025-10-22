@@ -1,5 +1,0 @@
-tar -xzf neuron-x.y.z.tar.gz
-cd neuron-x.y.z
-./configure --prefix=/path/to/install
-make
-make install

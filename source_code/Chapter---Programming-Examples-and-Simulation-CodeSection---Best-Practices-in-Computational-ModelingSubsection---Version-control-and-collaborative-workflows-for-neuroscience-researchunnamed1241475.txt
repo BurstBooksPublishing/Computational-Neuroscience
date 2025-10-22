@@ -1,6 +1,0 @@
-def backpropagation(self, x, y, learning_rate):
-    error = y - self.output
-    d_weights2 = np.dot(self.hidden.T, error)
-    d_weights1 = np.dot(x.T, np.dot(error, self.weights2.T) * self.hidden * (1 - self.hidden))
-    self.weights2 += learning_rate * d_weights2
-    self.weights1 += learning_rate * d_weights1

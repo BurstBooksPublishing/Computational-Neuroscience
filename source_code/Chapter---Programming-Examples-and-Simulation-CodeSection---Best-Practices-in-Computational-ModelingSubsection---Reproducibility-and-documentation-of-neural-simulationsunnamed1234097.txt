@@ -1,8 +1,0 @@
-# Simulation Metadata
-# Date: 2023-10-01
-# Author: John Doe
-# Parameters: simulation_time=1000, time_step=0.01, neuron_count=100
-time,neuron_1,neuron_2,neuron_3
-0.00, -65.0, -65.0, -65.0
-0.01, -64.9, -64.9, -64.9
-...

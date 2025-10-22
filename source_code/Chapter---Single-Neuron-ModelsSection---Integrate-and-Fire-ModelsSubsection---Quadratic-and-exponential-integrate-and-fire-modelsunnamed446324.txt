@@ -1,6 +1,0 @@
-def exponential_integrate_and_fire(V, V_r, V_t, Delta_T, I, dt):
-    dV = (-(V - V_r) + Delta_T * np.exp((V - V_t) / Delta_T) + I) * dt / tau_m
-    V += dV
-    if V >= V_peak:
-        V = V_reset
-    return V

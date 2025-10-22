@@ -1,5 +1,0 @@
-from scipy.signal import resample
-
-def resample_signal(data, original_fs, target_fs):
-    num_samples = int(len(data) * target_fs / original_fs)
-    return resample(data, num_samples)

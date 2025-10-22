@@ -1,1 +1,0 @@
-mcflirt -in input_volume -out output_volume -refvol 0

@@ -1,9 +1,0 @@
-class HierarchicalAgent:
-    def __init__(self, high_level_policy, low_level_policy):
-        self.high_level_policy = high_level_policy
-        self.low_level_policy = low_level_policy
-
-    def select_action(self, state):
-        subgoal = self.high_level_policy.select_subgoal(state)
-        action = self.low_level_policy.select_action(state, subgoal)
-        return action

@@ -1,7 +1,0 @@
-import numpy as np
-
-def compute_saliency_map(image, feature_maps, weights):
-    saliency_map = np.zeros_like(image)
-    for i, feature_map in enumerate(feature_maps):
-        saliency_map += weights[i] * feature_map
-    return saliency_map

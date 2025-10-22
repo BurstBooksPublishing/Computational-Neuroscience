@@ -1,3 +1,0 @@
-def update_activity(r, W, I):
-    r_new = np.heaviside(np.dot(W, r) + I, 0)
-    return r_new

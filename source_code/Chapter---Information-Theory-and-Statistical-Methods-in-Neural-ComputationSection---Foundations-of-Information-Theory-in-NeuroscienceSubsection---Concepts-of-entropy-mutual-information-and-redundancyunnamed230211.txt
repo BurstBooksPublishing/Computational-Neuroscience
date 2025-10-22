@@ -1,8 +1,0 @@
-def mutual_information(joint_prob, marginal_x, marginal_y):
-    return entropy(marginal_x) + entropy(marginal_y) - entropy(joint_prob)
-
-# Example usage
-joint_prob = np.array([[0.1, 0.2], [0.3, 0.4]])
-marginal_x = np.sum(joint_prob, axis=1)
-marginal_y = np.sum(joint_prob, axis=0)
-print("Mutual Information:", mutual_information(joint_prob, marginal_x, marginal_y))

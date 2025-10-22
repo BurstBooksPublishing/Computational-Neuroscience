@@ -1,3 +1,0 @@
-for t in range(num_steps):
-    r_E = r_E + dt/tau_E * (-r_E + f(W_EE @ r_E - W_EI @ r_I + I_E))
-    r_I = r_I + dt/tau_I * (-r_I + f(W_IE @ r_E - W_II @ r_I + I_I))

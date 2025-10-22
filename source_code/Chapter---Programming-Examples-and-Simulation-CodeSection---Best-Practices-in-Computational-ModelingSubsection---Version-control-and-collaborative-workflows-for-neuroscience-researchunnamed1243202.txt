@@ -1,5 +1,0 @@
-The output of the neural network is given by:
-\[
-y = f\left(\sum_{i=1}^n w_i x_i + b\right)
-\]
-where \(f\) is the activation function, \(w_i\) are the weights, \(x_i\) are the inputs, and \(b\) is the bias.
