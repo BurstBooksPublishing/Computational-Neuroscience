@@ -1,0 +1,38 @@
+import numpy as np
+from scipy.integrate import odeint
+
+def hodgkin_huxley(y, t, I_ext):
+    V, m, h, n = y
+    g_Na = 120  # mS/cm^2
+    g_K = 36    # mS/cm^2
+    g_L = 0.3   # mS/cm^2
+    E_Na = 50   # mV
+    E_K = -77   # mV
+    E_L = -54.387  # mV
+    C_m = 1     # uF/cm^2
+
+    alpha_m = 0.1 * (V + 40) / (1 - np.exp(-(V + 40) / 10))
+    beta_m = 4 * np.exp(-(V + 65) / 18)
+    alpha_h = 0.07 * np.exp(-(V + 65) / 20)
+    beta_h = 1 / (1 + np.exp(-(V + 35) / 10))
+    alpha_n = 0.01 * (V + 55) / (1 - np.exp(-(V + 55) / 10))
+    beta_n = 0.125 * np.exp(-(V + 65) / 80)
+
+    I_Na = g_Na * m**3 * h * (V - E_Na)
+    I_K = g_K * n**4 * (V - E_K)
+    I_L = g_L * (V - E_L)
+
+    dVdt = (I_ext - I_Na - I_K - I_L) / C_m
+    dmdt = alpha_m * (1 - m) - beta_m * m
+    dhdt = alpha_h * (1 - h) - beta_h * h
+    dndt = alpha_n * (1 - n) - beta_n * n
+
+    return [dVdt, dmdt, dhdt, dndt]
+
+# Initial conditions
+y0 = [-65, 0.05, 0.6, 0.32]
+t = np.linspace(0, 50, 1000)
+I_ext = 10  # External current in uA/cm^2
+
+# Solve the ODE
+y = odeint(hodgkin_huxley, y0, t, args=(I_ext,))
