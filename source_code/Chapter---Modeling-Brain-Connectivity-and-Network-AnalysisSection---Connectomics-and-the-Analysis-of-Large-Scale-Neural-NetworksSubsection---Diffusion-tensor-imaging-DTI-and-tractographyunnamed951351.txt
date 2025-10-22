@@ -1,0 +1,28 @@
+import numpy as np
+import dipy.reconst.dti as dti
+import dipy.tracking.streamline as streamline
+from dipy.data import get_fnames
+from dipy.io.gradients import read_bvals_bvecs
+from dipy.core.gradients import gradient_table
+from dipy.io.image import load_nifti
+
+# Load DTI data
+fname = get_fnames('stanford_hardi')
+data, affine = load_nifti(fname)
+bvals, bvecs = read_bvals_bvecs(*get_fnames('stanford_hardi'))
+gtab = gradient_table(bvals, bvecs)
+
+# Fit diffusion tensor model
+tenmodel = dti.TensorModel(gtab)
+tenfit = tenmodel.fit(data)
+
+# Perform deterministic tractography
+seeds = np.random.randint(0, data.shape[0], (1000, 3))
+streamlines = streamline.Streamlines(tenfit.directions, seeds)
+
+# Visualize results
+from dipy.viz import window, actor
+ren = window.Renderer()
+streamlines_actor = actor.line(streamlines)
+ren.add(streamlines_actor)
+window.show(ren)
