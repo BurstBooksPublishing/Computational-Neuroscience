@@ -1,0 +1,20 @@
+# Hodgkin-Huxley model equations
+def dV_dt(V, m, h, n, I_ext):
+    """
+    Computes the derivative of the membrane potential V.
+    """
+    g_Na = 120  # Sodium conductance (mS/cm^2)
+    g_K = 36    # Potassium conductance (mS/cm^2)
+    g_L = 0.3   # Leak conductance (mS/cm^2)
+    E_Na = 50   # Sodium reversal potential (mV)
+    E_K = -77   # Potassium reversal potential (mV)
+    E_L = -54.387  # Leak reversal potential (mV)
+    C_m = 1     # Membrane capacitance (uF/cm^2)
+    
+    # Compute the membrane current
+    I_Na = g_Na * m**3 * h * (V - E_Na)
+    I_K = g_K * n**4 * (V - E_K)
+    I_L = g_L * (V - E_L)
+    
+    # Compute the derivative of V
+    return (I_ext - I_Na - I_K - I_L) / C_m
