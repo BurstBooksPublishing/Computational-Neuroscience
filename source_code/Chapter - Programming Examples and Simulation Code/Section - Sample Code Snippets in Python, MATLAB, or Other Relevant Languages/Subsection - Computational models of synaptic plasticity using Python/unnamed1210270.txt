@@ -1,0 +1,36 @@
+import numpy as np
+
+def stdp_update(weights, pre_spikes, post_spikes, A_plus, A_minus, tau_plus, tau_minus):
+    """
+    Update synaptic weights using the STDP rule.
+    
+    Parameters:
+    weights (numpy.ndarray): Current synaptic weights.
+    pre_spikes (numpy.ndarray): Array of presynaptic spike times.
+    post_spikes (numpy.ndarray): Array of postsynaptic spike times.
+    A_plus (float): Maximum potentiation.
+    A_minus (float): Maximum depression.
+    tau_plus (float): Time constant for potentiation.
+    tau_minus (float): Time constant for depression.
+    
+    Returns:
+    numpy.ndarray: Updated synaptic weights.
+    """
+    for pre_time in pre_spikes:
+        for post_time in post_spikes:
+            delta_t = pre_time - post_time
+            if delta_t > 0:
+                weights += A_plus * np.exp(-delta_t / tau_plus)
+            else:
+                weights += A_minus * np.exp(delta_t / tau_minus)
+    return weights
+
+# Example usage
+weights = np.array([0.5, 0.6, 0.7])
+pre_spikes = np.array([1.0, 2.0, 3.0])
+post_spikes = np.array([1.5, 2.5, 3.5])
+A_plus, A_minus = 0.01, -0.01
+tau_plus, tau_minus = 20.0, 20.0
+
+updated_weights = stdp_update(weights, pre_spikes, post_spikes, A_plus, A_minus, tau_plus, tau_minus)
+print("Updated weights:", updated_weights)
