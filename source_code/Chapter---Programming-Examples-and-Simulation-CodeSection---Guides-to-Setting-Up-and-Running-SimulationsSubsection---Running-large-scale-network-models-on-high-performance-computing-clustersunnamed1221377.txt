@@ -1,0 +1,34 @@
+#!/bin/bash
+#SBATCH --job-name=nest_simulation
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=16
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=64GB
+#SBATCH --time=01:00:00
+#SBATCH --output=nest_output_%j.log
+
+# Load necessary modules
+module load nest/3.0
+
+# Run the simulation
+mpirun -np 64 python nest_simulation.py
+In addition to parallelizing the network model, it is essential to optimize the simulation for performance. This includes minimizing communication overhead between MPI ranks, reducing memory usage, and leveraging vectorized operations. For example, in NEURON, the `ParallelContext` class can be used to manage distributed simulations efficiently. The following code snippet shows how to set up a parallel simulation in NEURON:
+\begin{lstlisting}
+from neuron import h
+
+# Initialize parallel context
+pc = h.ParallelContext()
+
+# Create cells
+cells = [h.Section(name=f'cell_{i}') for i in range(1000)]
+
+# Connect cells
+for i in range(len(cells) - 1):
+    syn = h.ExpSyn(cells[i](0.5))
+    nc = h.NetCon(cells[i](0.5)._ref_v, syn, sec=cells[i])
+    nc.weight[0] = 0.01
+
+# Run simulation
+h.tstop = 1000.0
+pc.set_maxstep(10)
+pc.psolve(h.tstop)
