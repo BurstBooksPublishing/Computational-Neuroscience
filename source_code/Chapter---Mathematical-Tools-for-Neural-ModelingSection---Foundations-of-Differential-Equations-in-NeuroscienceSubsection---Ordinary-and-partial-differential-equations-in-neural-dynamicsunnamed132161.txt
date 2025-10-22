@@ -1,0 +1,6 @@
+def finite_difference_cable(V, I_ext, dt, dx, tau_m, lambda_sq, r_m):
+    n = len(V)
+    V_new = np.zeros(n)
+    for i in range(1, n-1):
+        V_new[i] = V[i] + (dt / tau_m) * (lambda_sq * (V[i+1] - 2*V[i] + V[i-1]) / dx**2 - V[i] + r_m * I_ext[i])
+    return V_new
