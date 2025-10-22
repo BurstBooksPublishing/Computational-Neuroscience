@@ -1,0 +1,24 @@
+from brian2 import *
+
+# Define neuron model
+eqs = '''
+dv/dt = (I - v) / tau : 1
+I : 1
+tau : second
+'''
+
+# Create neuron group
+G = NeuronGroup(1000, eqs, threshold='v > 1', reset='v = 0', method='euler')
+
+# Set parameters
+G.v = 'rand()'
+G.I = '1.5 * rand()'
+G.tau = 10*ms
+
+# Create synapses
+S = Synapses(G, G, 'w : 1', on_pre='v_post += w')
+S.connect(p=0.1)
+S.w = '0.1 * rand()'
+
+# Run simulation
+run(100*ms)
