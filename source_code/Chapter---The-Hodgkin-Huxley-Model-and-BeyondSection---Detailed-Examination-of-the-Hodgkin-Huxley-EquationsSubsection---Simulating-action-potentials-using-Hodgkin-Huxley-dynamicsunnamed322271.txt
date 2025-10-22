@@ -1,0 +1,69 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+C_m = 1.0  # Membrane capacitance (uF/cm^2)
+g_Na = 120.0  # Sodium conductance (mS/cm^2)
+g_K = 36.0  # Potassium conductance (mS/cm^2)
+g_L = 0.3  # Leak conductance (mS/cm^2)
+E_Na = 50.0  # Sodium reversal potential (mV)
+E_K = -77.0  # Potassium reversal potential (mV)
+E_L = -54.387  # Leak reversal potential (mV)
+
+# Rate functions
+def alpha_m(V): return 0.1 * (V + 40.0) / (1.0 - np.exp(-(V + 40.0) / 10.0))
+def beta_m(V): return 4.0 * np.exp(-(V + 65.0) / 18.0)
+def alpha_h(V): return 0.07 * np.exp(-(V + 65.0) / 20.0)
+def beta_h(V): return 1.0 / (1.0 + np.exp(-(V + 35.0) / 10.0))
+def alpha_n(V): return 0.01 * (V + 55.0) / (1.0 - np.exp(-(V + 55.0) / 10.0))
+def beta_n(V): return 0.125 * np.exp(-(V + 65.0) / 80.0)
+
+# Initial conditions
+V_m = -65.0  # Membrane potential (mV)
+m = alpha_m(V_m) / (alpha_m(V_m) + beta_m(V_m))
+h = alpha_h(V_m) / (alpha_h(V_m) + beta_h(V_m))
+n = alpha_n(V_m) / (alpha_n(V_m) + beta_n(V_m))
+
+# Time parameters
+dt = 0.01  # Time step (ms)
+t_max = 50.0  # Total simulation time (ms)
+t = np.arange(0, t_max, dt)
+
+# External current
+I_ext = np.zeros_like(t)
+I_ext[1000:2000] = 10.0  # Inject current between 10 and 20 ms
+
+# Arrays to store results
+V_m_hist = np.zeros_like(t)
+m_hist = np.zeros_like(t)
+h_hist = np.zeros_like(t)
+n_hist = np.zeros_like(t)
+
+# Simulation loop
+for i in range(len(t)):
+    # Update gating variables
+    m += dt * (alpha_m(V_m) * (1 - m) - beta_m(V_m) * m)
+    h += dt * (alpha_h(V_m) * (1 - h) - beta_h(V_m) * h)
+    n += dt * (alpha_n(V_m) * (1 - n) - beta_n(V_m) * n)
+    
+    # Update membrane potential
+    I_Na = g_Na * m**3 * h * (V_m - E_Na)
+    I_K = g_K * n**4 * (V_m - E_K)
+    I_L = g_L * (V_m - E_L)
+    dV_m = (I_ext[i] - I_Na - I_K - I_L) / C_m
+    V_m += dt * dV_m
+    
+    # Store results
+    V_m_hist[i] = V_m
+    m_hist[i] = m
+    h_hist[i] = h
+    n_hist[i] = n
+
+# Plot results
+plt.figure(figsize=(10, 6))
+plt.plot(t, V_m_hist, label='Membrane Potential (mV)')
+plt.xlabel('Time (ms)')
+plt.ylabel('Membrane Potential (mV)')
+plt.title('Hodgkin-Huxley Model Simulation')
+plt.legend()
+plt.show()
