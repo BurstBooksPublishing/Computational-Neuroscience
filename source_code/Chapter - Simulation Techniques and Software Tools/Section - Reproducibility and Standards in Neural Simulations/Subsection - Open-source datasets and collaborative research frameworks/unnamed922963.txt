@@ -1,0 +1,23 @@
+import torch
+import bindsnet
+
+# Define network
+network = bindsnet.network.Network()
+
+# Add layers
+input_layer = bindsnet.network.nodes.Input(n=784)
+output_layer = bindsnet.network.nodes.LIF(n=10)
+network.add_layer(input_layer, name="input")
+network.add_layer(output_layer, name="output")
+
+# Add connections
+connection = bindsnet.network.topology.Connection(
+    source=input_layer, target=output_layer, w=torch.randn(784, 10)
+)
+network.add_connection(connection, source="input", target="output")
+
+# Train network
+for epoch in range(10):
+    for data, labels in train_loader:
+        inputs = {"input": data}
+        network.run(inputs=inputs, time=100)
