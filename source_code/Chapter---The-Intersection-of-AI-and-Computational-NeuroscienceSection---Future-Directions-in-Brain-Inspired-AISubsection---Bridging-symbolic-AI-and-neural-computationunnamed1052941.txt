@@ -1,0 +1,11 @@
+import torch
+import torch.nn as nn
+
+class DifferentiableLogicLayer(nn.Module):
+    def __init__(self, num_rules):
+        super(DifferentiableLogicLayer, self).__init__()
+        self.rules = nn.Parameter(torch.randn(num_rules))
+
+    def forward(self, x):
+        # Apply differentiable logic rules
+        return torch.sigmoid(torch.matmul(x, self.rules))
