@@ -1,0 +1,7 @@
+tar -xzf nest-x.y.z.tar.gz
+cd nest-x.y.z
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/path/to/install ..
+make
+make install
