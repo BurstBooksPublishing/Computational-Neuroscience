@@ -1,0 +1,8 @@
+def leaky_integrate_and_fire(V, I_ext, dt, tau_m, R_m, V_rest, V_th, V_reset):
+    dV_dt = (-(V - V_rest) + R_m * I_ext) / tau_m
+    V_new = V + dV_dt * dt
+
+    if V_new >= V_th:
+        V_new = V_reset
+
+    return V_new
