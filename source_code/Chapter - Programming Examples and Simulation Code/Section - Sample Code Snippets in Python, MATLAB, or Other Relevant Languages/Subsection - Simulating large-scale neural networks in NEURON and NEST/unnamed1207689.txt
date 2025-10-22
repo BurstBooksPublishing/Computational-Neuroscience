@@ -1,0 +1,16 @@
+% Initialize NEST
+nest.ResetKernel();
+
+% Set parameters
+num_neurons = 10000;
+sim_time = 1000.0;  % Simulation time (ms)
+
+% Create neurons and devices
+neurons = nest.Create('iaf_psc_alpha', num_neurons);
+spike_detector = nest.Create('spike_detector');
+
+% Connect neurons with synapses
+nest.Connect(neurons, spike_detector);
+
+% Run simulation
+nest.Simulate(sim_time);
