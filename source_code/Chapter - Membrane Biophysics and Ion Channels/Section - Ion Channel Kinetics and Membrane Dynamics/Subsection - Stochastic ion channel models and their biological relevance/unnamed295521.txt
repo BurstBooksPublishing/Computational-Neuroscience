@@ -1,0 +1,22 @@
+import numpy as np
+
+def gillespie_ion_channel(initial_state, transition_rates, simulation_time):
+    state = initial_state
+    time = 0
+    states = [state]
+    times = [time]
+    
+    while time < simulation_time:
+        rates = transition_rates[state]
+        total_rate = sum(rates)
+        if total_rate == 0:
+            break
+        dt = -np.log(np.random.random()) / total_rate
+        time += dt
+        transition_probabilities = rates / total_rate
+        next_state = np.random.choice(len(rates), p=transition_probabilities)
+        state = next_state
+        states.append(state)
+        times.append(time)
+    
+    return times, states
