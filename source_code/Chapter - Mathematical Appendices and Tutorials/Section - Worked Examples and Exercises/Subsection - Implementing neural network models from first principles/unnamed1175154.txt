@@ -1,0 +1,25 @@
+import numpy as np
+
+# Parameters
+tau_m = 20.0  # Membrane time constant (ms)
+V_rest = -65.0  # Resting potential (mV)
+R_m = 1.0  # Membrane resistance (MÎ©)
+dt = 0.1  # Time step (ms)
+T = 1000  # Total simulation time (ms)
+n_neurons = 10  # Number of neurons
+
+# Initialize membrane potentials
+V = np.full(n_neurons, V_rest)
+
+# Synaptic weights (randomly initialized)
+W = np.random.randn(n_neurons, n_neurons)
+
+# Input currents (randomly generated)
+I = np.random.randn(n_neurons, int(T / dt))
+
+# Simulation loop
+for t in range(int(T / dt)):
+    dV = (-(V - V_rest) + R_m * np.dot(W, I[:, t])) * (dt / tau_m)
+    V += dV
+    # Reset neurons that have spiked
+    V[V >= -50.0] = V_rest
