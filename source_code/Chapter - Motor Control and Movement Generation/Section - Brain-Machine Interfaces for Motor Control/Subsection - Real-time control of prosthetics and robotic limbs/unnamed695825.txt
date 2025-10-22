@@ -1,0 +1,4 @@
+while True:
+    neural_data = acquire_neural_signals()
+    movement_command = decode_neural_signals(neural_data)
+    execute_movement(movement_command)
