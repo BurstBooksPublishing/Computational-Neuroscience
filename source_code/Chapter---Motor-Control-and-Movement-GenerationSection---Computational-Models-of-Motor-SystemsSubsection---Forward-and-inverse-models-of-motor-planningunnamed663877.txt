@@ -1,0 +1,4 @@
+def forward_model(state, command):
+    # Simulate system dynamics
+    next_state = state + command * dt  # Example dynamics
+    return next_state
