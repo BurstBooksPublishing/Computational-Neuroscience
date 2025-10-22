@@ -1,0 +1,5 @@
+# Validate exponential decay
+V_0 = -65  # Initial membrane potential (mV)
+tau_m = 20  # Membrane time constant (ms)
+t = np.arange(0, 100, 0.1)  # Time array (ms)
+V_t = V_0 * np.exp(-t / tau_m)  # Analytical solution
