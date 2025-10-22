@@ -1,0 +1,17 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate calcium transients
+time = np.linspace(0, 10, 1000)
+calcium_transient = np.exp(-time) * np.sin(2 * np.pi * time)
+
+# Add noise to simulate experimental data
+noise = np.random.normal(0, 0.1, 1000)
+calcium_signal = calcium_transient + noise
+
+# Plot the simulated calcium signal
+plt.plot(time, calcium_signal, label="Calcium Signal")
+plt.xlabel("Time (s)")
+plt.ylabel("Fluorescence Intensity (a.u.)")
+plt.legend()
+plt.show()
