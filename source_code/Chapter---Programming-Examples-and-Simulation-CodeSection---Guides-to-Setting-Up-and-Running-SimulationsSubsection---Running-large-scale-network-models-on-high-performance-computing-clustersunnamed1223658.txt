@@ -1,0 +1,16 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load spike data
+spike_times = np.load('spike_times.npy')
+neuron_ids = np.load('neuron_ids.npy')
+
+# Calculate firing rate
+time_bins = np.arange(0, 1000, 10)
+firing_rate, _ = np.histogram(spike_times, bins=time_bins)
+
+# Plot firing rate
+plt.plot(time_bins[:-1], firing_rate)
+plt.xlabel('Time (ms)')
+plt.ylabel('Firing Rate (Hz)')
+plt.show()
