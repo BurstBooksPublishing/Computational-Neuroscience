@@ -1,0 +1,10 @@
+def somatotopic_map(body_surface, learning_rate=0.1, epochs=100):
+    # Initialize weights
+    weights = initialize_weights(body_surface)
+    for epoch in range(epochs):
+        for body_point in body_surface:
+            # Find the best matching unit (BMU)
+            bmu = find_bmu(body_point, weights)
+            # Update weights
+            weights = update_weights(weights, bmu, body_point, learning_rate)
+    return weights
