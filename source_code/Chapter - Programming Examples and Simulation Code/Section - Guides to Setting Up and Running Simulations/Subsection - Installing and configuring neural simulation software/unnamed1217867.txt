@@ -1,0 +1,5 @@
+from neuron import h, gui
+soma = h.Section(name='soma')
+soma.L = 20
+soma.diam = 20
+h.psection()
