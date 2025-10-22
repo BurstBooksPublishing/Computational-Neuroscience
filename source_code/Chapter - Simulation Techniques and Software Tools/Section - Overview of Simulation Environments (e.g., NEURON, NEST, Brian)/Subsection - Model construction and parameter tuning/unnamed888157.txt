@@ -1,0 +1,6 @@
+from neuron import h
+
+soma = h.Section(name='soma')
+soma.L = 30  # length in microns
+soma.diam = 30  # diameter in microns
+soma.insert('hh')  # insert Hodgkin-Huxley channels
