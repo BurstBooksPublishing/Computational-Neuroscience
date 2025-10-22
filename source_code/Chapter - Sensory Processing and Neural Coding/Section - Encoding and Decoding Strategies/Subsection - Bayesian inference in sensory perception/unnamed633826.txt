@@ -1,0 +1,6 @@
+# Define prior and likelihood distributions
+prior = np.array([0.1, 0.3, 0.4, 0.2])  # Prior probabilities for motion directions
+likelihood = np.array([0.7, 0.1, 0.1, 0.1])  # Likelihood of retinal input given motion
+
+# Compute posterior using Bayes' theorem
+posterior = (likelihood * prior) / np.sum(likelihood * prior)
