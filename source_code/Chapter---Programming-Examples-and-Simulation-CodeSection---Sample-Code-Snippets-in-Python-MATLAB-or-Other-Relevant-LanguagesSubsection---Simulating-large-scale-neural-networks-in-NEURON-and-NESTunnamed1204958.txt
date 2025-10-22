@@ -1,0 +1,27 @@
+from neuron import h, gui
+
+# Create a neuron
+soma = h.Section(name='soma')
+soma.insert('hh')
+
+# Set parameters
+soma.L = 20  # Length (Î¼m)
+soma.diam = 20  # Diameter (Î¼m)
+
+# Create a network of neurons
+num_neurons = 1000
+neurons = [h.Section(name=f'neuron_{i}') for i in range(num_neurons)]
+for neuron in neurons:
+    neuron.insert('hh')
+
+# Connect neurons with synapses
+synapses = []
+for i in range(num_neurons - 1):
+    syn = h.ExpSyn(neurons[i](0.5))
+    synapses.append(syn)
+    nc = h.NetCon(neurons[i](0.5)._ref_v, syn, sec=neurons[i])
+    nc.weight[0] = 0.01  # Synaptic weight
+
+# Run simulation
+h.tstop = 100  # Simulation time (ms)
+h.run()
