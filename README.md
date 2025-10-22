@@ -1,5 +1,8 @@
 # Computational Neuroscience
 
+### Cover
+<img src="covers/Front.png" alt="Book Cover" width="300" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 3px 8px rgba(0,0,0,0.1);"/>
+
 ### Repository Structure
 - `covers/`: Book cover images
 - `blurbs/`: Promotional blurbs
