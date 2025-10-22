@@ -1,0 +1,6 @@
+import nest
+
+nest.ResetKernel()
+neuron = nest.Create('iaf_psc_alpha', 100)
+spike_generator = nest.Create('spike_generator')
+nest.Connect(spike_generator, neuron)
