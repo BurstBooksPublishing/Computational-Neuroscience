@@ -1,0 +1,9 @@
+def decision_making(mu, sigma, theta, dt, max_iterations):
+    x = 0
+    for t in range(max_iterations):
+        x += mu * dt + sigma * np.random.normal() * np.sqrt(dt)
+        if x >= theta:
+            return 1  # Decision for option A
+        if x <= -theta:
+            return -1  # Decision for option B
+    return 0  # No decision within the time limit
