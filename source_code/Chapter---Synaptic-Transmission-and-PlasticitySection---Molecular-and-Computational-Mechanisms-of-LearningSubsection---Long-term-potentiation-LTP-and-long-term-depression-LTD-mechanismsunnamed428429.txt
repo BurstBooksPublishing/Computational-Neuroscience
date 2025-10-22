@@ -1,0 +1,11 @@
+import numpy as np
+
+def stdp_update(weights, pre_spikes, post_spikes, A_plus, A_minus, tau_plus, tau_minus):
+    for i in range(len(pre_spikes)):
+        for j in range(len(post_spikes)):
+            delta_t = post_spikes[j] - pre_spikes[i]
+            if delta_t > 0:
+                weights[i] += A_plus * np.exp(-delta_t / tau_plus)
+            elif delta_t < 0:
+                weights[i] += A_minus * np.exp(delta_t / tau_minus)
+    return weights
