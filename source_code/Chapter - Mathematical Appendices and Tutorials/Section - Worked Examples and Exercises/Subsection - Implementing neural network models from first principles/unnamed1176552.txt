@@ -1,0 +1,10 @@
+# Parameters
+eta = 0.01  # Learning rate
+
+# Simulate activity (randomly generated)
+X = np.random.rand(n_neurons, int(T / dt))
+Y = np.random.rand(n_neurons, int(T / dt))
+
+# Update synaptic weights
+for t in range(int(T / dt)):
+    W += eta * np.outer(X[:, t], Y[:, t])
