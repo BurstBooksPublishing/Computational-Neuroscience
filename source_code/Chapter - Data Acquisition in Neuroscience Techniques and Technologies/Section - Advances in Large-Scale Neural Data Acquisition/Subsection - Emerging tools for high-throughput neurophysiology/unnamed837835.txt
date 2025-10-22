@@ -1,0 +1,7 @@
+import pynwb
+
+# Load NWB file
+nwb_file = pynwb.NWBHDF5IO('example.nwb', 'r').read()
+
+# Access neural data
+neural_data = nwb_file.acquisition['ElectricalSeries'].data[:]
