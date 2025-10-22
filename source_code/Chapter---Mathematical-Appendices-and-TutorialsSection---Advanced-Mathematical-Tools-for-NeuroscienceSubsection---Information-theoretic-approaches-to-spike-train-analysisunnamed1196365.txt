@@ -1,0 +1,25 @@
+import numpy as np
+from scipy.stats import entropy
+from sklearn.neighbors import KernelDensity
+
+# Binning approach for entropy estimation
+def entropy_binning(spike_train, bin_size):
+    binned_spikes = np.histogram(spike_train, bins=bin_size)[0]
+    prob = binned_spikes / np.sum(binned_spikes)
+    return entropy(prob)
+
+# Kernel density estimation for mutual information
+def mutual_info_kde(spike_train_X, spike_train_Y, bandwidth):
+    kde_X = KernelDensity(bandwidth=bandwidth).fit(spike_train_X[:, None])
+    kde_Y = KernelDensity(bandwidth=bandwidth).fit(spike_train_Y[:, None])
+    kde_XY = KernelDensity(bandwidth=bandwidth).fit(np.hstack([spike_train_X[:, None], spike_train_Y[:, None]]))
+    
+    log_p_X = kde_X.score_samples(spike_train_X[:, None])
+    log_p_Y = kde_Y.score_samples(spike_train_Y[:, None])
+    log_p_XY = kde_XY.score_samples(np.hstack([spike_train_X[:, None], spike_train_Y[:, None]]))
+    
+    H_X = -np.mean(log_p_X)
+    H_Y = -np.mean(log_p_Y)
+    H_XY = -np.mean(log_p_XY)
+    
+    return H_X + H_Y - H_XY
