@@ -1,0 +1,13 @@
+from sklearn.svm import SVC
+import numpy as np
+
+# Example spike train data and labels
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])
+y = np.array([0, 0, 1, 1])
+
+# Train SVM classifier
+svm = SVC(kernel='linear').fit(X, y)
+
+# Predict labels for new data
+new_data = np.array([[2.5, 3.5]])
+predicted_labels = svm.predict(new_data)
