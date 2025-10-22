@@ -1,0 +1,1 @@
+soma.gnabar_hh = 0.12  # sodium conductance in S/cm^2
