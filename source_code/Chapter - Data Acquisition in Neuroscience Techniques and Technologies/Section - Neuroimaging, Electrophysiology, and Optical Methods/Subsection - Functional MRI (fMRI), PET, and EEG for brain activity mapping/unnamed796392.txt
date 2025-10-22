@@ -1,0 +1,11 @@
+import nibabel as nib
+from nilearn import image
+
+# Load fMRI data
+fmri_img = nib.load('fmri_data.nii.gz')
+
+# Smooth the data
+smoothed_img = image.smooth_img(fmri_img, fwhm=6)
+
+# Save the smoothed image
+smoothed_img.to_filename('smoothed_fmri_data.nii.gz')
