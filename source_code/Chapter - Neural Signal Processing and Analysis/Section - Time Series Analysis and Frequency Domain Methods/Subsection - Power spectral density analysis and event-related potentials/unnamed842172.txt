@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import welch
+
+# Simulate EEG data
+fs = 1000  # Sampling frequency (Hz)
+t = np.arange(0, 1, 1/fs)  # Time vector
+N_trials = 100  # Number of trials
+eeg_data = np.zeros((N_trials, len(t)))
+
+for i in range(N_trials):
+    eeg_data[i, :] = np.sin(2 * np.pi * 10 * t) + 0.5 * np.random.randn(len(t))
+
+# Compute ERP
+erp = np.mean(eeg_data, axis=0)
+
+# Compute PSD of ERP
+frequencies, psd = welch(erp, fs, nperseg=256)
+
+# Plot results
+plt.figure()
+plt.subplot(2, 1, 1)
+plt.plot(t, erp)
+plt.title('ERP')
+plt.xlabel('Time (s)')
+plt.ylabel('Amplitude (ÂµV)')
+
+plt.subplot(2, 1, 2)
+plt.plot(frequencies, psd)
+plt.title('PSD of ERP')
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Power (ÂµVÂ²/Hz)')
+
+plt.tight_layout()
+plt.show()
