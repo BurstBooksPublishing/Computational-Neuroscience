@@ -1,0 +1,18 @@
+import numpy as np
+
+class LIFNeuron:
+    def __init__(self, tau_m, R_m, V_th, V_rest):
+        self.tau_m = tau_m
+        self.R_m = R_m
+        self.V_th = V_th
+        self.V_rest = V_rest
+        self.V = V_rest
+
+    def update(self, I, dt):
+        dV = (-self.V + self.R_m * I) / self.tau_m
+        self.V += dV * dt
+        if self.V >= self.V_th:
+            spike_time = dt
+            self.V = self.V_rest
+            return spike_time
+        return None
