@@ -1,0 +1,10 @@
+from sklearn.neural_network import MLPRegressor
+
+# Define the model
+model = MLPRegressor(hidden_layer_sizes=(100, 50), activation='relu', solver='adam')
+
+# Train the model
+model.fit(X_train, y_train)
+
+# Predict drug effects
+predictions = model.predict(X_test)
