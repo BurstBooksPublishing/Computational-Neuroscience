@@ -1,0 +1,27 @@
+import numpy as np
+from scipy.integrate import solve_ivp
+
+def fitzhugh_nagumo(t, state, a, b, epsilon, I_ext):
+    v, w = state
+    dvdt = v - v**3 / 3 - w + I_ext
+    dwdt = epsilon * (v + a - b * w)
+    return [dvdt, dwdt]
+
+# Parameters
+a, b, epsilon, I_ext = 0.7, 0.8, 0.08, 0.5
+initial_state = [0.0, 0.0]
+t_span = (0, 100)
+t_eval = np.linspace(0, 100, 1000)
+
+# Solve the system
+solution = solve_ivp(fitzhugh_nagumo, t_span, initial_state, 
+                    args=(a, b, epsilon, I_ext), t_eval=t_eval)
+
+# Calculate Lyapunov exponent (simplified example)
+def lyapunov_exponent(trajectory):
+    differences = np.diff(trajectory, axis=0)
+    distances = np.linalg.norm(differences, axis=1)
+    return np.mean(np.log(distances))
+
+lyapunov_exp = lyapunov_exponent(solution.y.T)
+print(f"Lyapunov Exponent: {lyapunov_exp}")
