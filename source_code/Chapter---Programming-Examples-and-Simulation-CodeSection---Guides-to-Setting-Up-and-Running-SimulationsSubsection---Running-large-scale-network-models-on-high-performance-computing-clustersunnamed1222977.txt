@@ -1,0 +1,11 @@
+import h5py
+import numpy as np
+
+# Generate example data
+spike_times = np.random.uniform(0, 1000, size=10000)
+neuron_ids = np.random.randint(0, 1000, size=10000)
+
+# Save data to HDF5 file
+with h5py.File('spike_data.h5', 'w') as f:
+    f.create_dataset('spike_times', data=spike_times)
+    f.create_dataset('neuron_ids', data=neuron_ids)
