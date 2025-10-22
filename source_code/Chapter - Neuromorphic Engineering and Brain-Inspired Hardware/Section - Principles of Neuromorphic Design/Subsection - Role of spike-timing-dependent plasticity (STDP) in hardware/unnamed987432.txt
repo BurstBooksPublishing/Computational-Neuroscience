@@ -1,0 +1,9 @@
+// Example of STDP implementation in a neuromorphic chip
+void update_synaptic_weight(float t_pre, float t_post, float &weight) {
+    float delta_t = t_post - t_pre;
+    if (delta_t > 0) {
+        weight += A_plus * exp(-delta_t / tau_plus);
+    } else {
+        weight -= A_minus * exp(delta_t / tau_minus);
+    }
+}
