@@ -1,0 +1,2 @@
+def population_response(x, c, R_max, sigma):
+    return R_max * np.exp(-(x - c)**2 / (2 * sigma**2))
