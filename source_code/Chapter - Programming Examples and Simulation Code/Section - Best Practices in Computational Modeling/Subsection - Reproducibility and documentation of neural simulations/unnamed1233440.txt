@@ -1,0 +1,6 @@
+{
+    "simulation_time": 1000,  # Simulation time in milliseconds
+    "time_step": 0.01,        # Time step in milliseconds
+    "neuron_count": 100,      # Number of neurons in the network
+    "synaptic_strength": 0.5  # Strength of synaptic connections
+}
