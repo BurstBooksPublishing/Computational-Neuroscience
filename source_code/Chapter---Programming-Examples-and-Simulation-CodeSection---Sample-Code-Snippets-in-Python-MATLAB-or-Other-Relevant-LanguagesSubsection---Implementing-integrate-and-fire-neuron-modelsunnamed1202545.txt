@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+tau_m = 20.0  # Membrane time constant (ms)
+R_m = 1.0     # Membrane resistance (MÎ©)
+V_rest = -65.0  # Resting potential (mV)
+V_thresh = -50.0  # Threshold potential (mV)
+V_reset = -70.0  # Reset potential (mV)
+dt = 0.1       # Time step (ms)
+T = 1000       # Total simulation time (ms)
+I_ext = 1.5    # External current (nA)
+g_max = 0.5   # Maximum synaptic conductance (Î¼S)
+tau_syn = 5.0  # Synaptic time constant (ms)
+E_syn = 0.0   # Synaptic reversal potential (mV)
+
+# Initialize variables
+V = V_rest     # Membrane potential
+t = np.arange(0, T, dt)  # Time array
+V_trace = []   # Membrane potential trace
+g_syn = 0.0    # Synaptic conductance
+
+# Simulation loop
+for i in range(len(t)):
+    if V >= V_thresh:
+        V = V_reset  # Reset potential after spike
+    I_syn = g_syn * (V - E_syn)
+    dV = (- (V - V_rest) + R_m * (I_ext + I_syn)) * (dt / tau_m)
+    V += dV
+    g_syn *= np.exp(-dt / tau_syn)  # Decay synaptic conductance
+    V_trace.append(V)
+
+# Plot results
+plt.plot(t, V_trace)
+plt.xlabel('Time (ms)')
+plt.ylabel('Membrane Potential (mV)')
+plt.title('Integrate-and-Fire Neuron Model with Synaptic Input')
+plt.show()
