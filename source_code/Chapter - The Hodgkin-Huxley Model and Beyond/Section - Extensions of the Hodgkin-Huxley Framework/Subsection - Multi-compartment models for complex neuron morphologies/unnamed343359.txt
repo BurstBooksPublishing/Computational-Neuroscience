@@ -1,0 +1,19 @@
+import numpy as np
+
+# Define parameters
+num_compartments = 10
+Cm = 1.0  # Membrane capacitance (uF/cm^2)
+dt = 0.01  # Time step (ms)
+t_max = 100  # Total simulation time (ms)
+V_m = np.zeros(num_compartments)  # Membrane potential (mV)
+I_ion = np.zeros(num_compartments)  # Ionic currents (uA/cm^2)
+R_axial = 1.0  # Axial resistance (MÎ©)
+
+# Time loop
+for t in np.arange(0, t_max, dt):
+    for i in range(num_compartments):
+        # Update membrane potential
+        if i > 0:
+            V_m[i] += dt / Cm * ((V_m[i-1] - V_m[i]) / R_axial - I_ion[i])
+        if i < num_compartments - 1:
+            V_m[i] += dt / Cm * ((V_m[i+1] - V_m[i]) / R_axial - I_ion[i])
