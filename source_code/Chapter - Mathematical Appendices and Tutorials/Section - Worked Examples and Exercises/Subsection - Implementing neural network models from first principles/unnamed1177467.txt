@@ -1,0 +1,23 @@
+# Parameters
+a = 0.02
+b = 0.2
+c = -65.0
+d = 8.0
+
+# Initialize variables
+v = c
+u = b * v
+
+# Input current (randomly generated)
+I = np.random.randn(int(T / dt))
+
+# Simulation loop
+for t in range(int(T / dt)):
+    dv = (0.04 * v**2 + 5 * v + 140 - u + I[t]) * dt
+    du = (a * (b * v - u)) * dt
+    v += dv
+    u += du
+    # Reset if spike occurs
+    if v >= 30:
+        v = c
+        u += d
